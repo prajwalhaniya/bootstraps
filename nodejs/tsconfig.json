@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "baseUrl": ".",
+        "declaration": true,
+        "declarationDir": "types",
+        "esModuleInterop": true,
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "noImplicitAny": false,
+        "noImplicitThis": false,
+        "outDir": "dist",
+        "paths": {
+            "*": ["node_modules/*"]
+        },
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strictFunctionTypes": false,
+        "strictNullChecks": true,
+        "target": "ESNext",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    }
+}
