@@ -1,0 +1,15 @@
+{
+    "javascript.validate.enable": true,
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.inlineSuggest.enabled": true,
+    "typescript.validate.enable": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontSize": 13,
+    "editor.fontWeight": "bold"
+}
