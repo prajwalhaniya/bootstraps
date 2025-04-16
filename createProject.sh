@@ -14,7 +14,7 @@ fi
 
 # Config
 repo_url="https://github.com/prajwalhaniya/bootstraps.git"
-commit_sha="ab448202b8f702f7c30270ea3be091257e7b51ef"
+commit_sha="cd0658048688c42fd1845c4a1e2df1f26a3b7337"
 
 # Determine the subdir based on project_type
 case "$project_type" in
