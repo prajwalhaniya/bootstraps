@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Exit on errors
+# Exit on error
 set -e
 
-# Get the project name and type from command line
+# Arguments
 project_name=$1
 project_type=$2
 
@@ -12,11 +12,11 @@ if [ -z "$project_name" ] || [ -z "$project_type" ]; then
     exit 1
 fi
 
-# Config
+# Configuration
 repo_url="https://github.com/prajwalhaniya/bootstraps.git"
-commit_sha="cd0658048688c42fd1845c4a1e2df1f26a3b7337"
+commit_sha="76d728a951c4038081413bdb718479f29ba2b367"
 
-# Determine the subdir based on project_type
+# Choose the correct subdirectory
 case "$project_type" in
     node)
         subdir="nodejs"
@@ -25,27 +25,25 @@ case "$project_type" in
         subdir="react"
         ;;
     *)
-        echo "Invalid project type: $project_type. Choose 'node' or 'react'."
+        echo "Invalid project type: $project_type"
+        echo "Valid options are: node, react"
         exit 1
         ;;
 esac
 
-# Create a temp directory
+# Create a temporary directory and clone with sparse checkout
 mkdir -p temp_clone && cd temp_clone
 git init -q
-
-# Enable sparse-checkout for just the subdir
 git sparse-checkout init --cone
 git sparse-checkout set "$subdir"
-
-# Fetch the specific commit
 git fetch "$repo_url" "$commit_sha" --depth=1
 git checkout FETCH_HEAD
 
-# Move the extracted subdir to the target project directory
+# Move the subdirectory to the destination project
 cd ..
 mv temp_clone/"$subdir" "$project_name"
 
+# Cleanup
 rm -rf temp_clone
 
-echo "✅ Project '$project_name' created from '$subdir' in commit $commit_sha"
+echo "✅ Project '$project_name' created from '$subdir' at commit $commit_sha"
