@@ -49,7 +49,8 @@ export default function Layout() {
             if (key === 'token') {
                 isCredentialsExisit = true;
 
-                const isTokenExpired = await checkForTokenExpiry(value);
+                // const isTokenExpired = await checkForTokenExpiry(value);
+                const isTokenExpired = false;
 
                 if (isTokenExpired) {
                     clearAllCookies();
