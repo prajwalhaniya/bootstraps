@@ -5,16 +5,23 @@ set -e
 
 # Get the project name from command line
 project_name=$1
+template_type=$2
 
-if [ -z "$project_name" ]; then
-    echo "Usage: $0 <project_name>"
+if [ -z "$project_name" ] || [ -z "$template_type" ]; then
+    echo "Usage: $0 <project_name> <template_type>"
+    echo "Available templates: react, nodejs"
+    exit 1
+fi
+
+if [ "$template_type" != "react" ] && [ "$template_type" != "nodejs" ]; then
+    echo "Error: Invalid template type. Available templates: react, nodejs"
     exit 1
 fi
 
 # Config
 repo_url="https://github.com/prajwalhaniya/bootstraps.git"
 commit_sha="ab448202b8f702f7c30270ea3be091257e7b51ef"
-subdir="nodejs"
+subdir="$template_type"
 
 # Create a temp directory
 mkdir -p temp_clone && cd temp_clone
