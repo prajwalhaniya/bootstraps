@@ -32,18 +32,21 @@ case "$project_type" in
 esac
 
 # Create a temporary directory and clone with sparse checkout
-mkdir -p temp_clone && cd temp_clone
+tmp_dir=$(mktemp -d)
+cd "$tmp_dir"
+
 git init -q
+git remote add origin "$repo_url"
 git sparse-checkout init --cone
 git sparse-checkout set "$subdir"
-git fetch "$repo_url" "$commit_sha" --depth=1
+git fetch origin "$commit_sha" --depth=1
 git checkout FETCH_HEAD
 
 # Move the subdirectory to the destination project
 cd ..
-mv temp_clone/"$subdir" "$project_name"
+mv "$tmp_dir/$subdir" "$project_name"
 
 # Cleanup
-rm -rf temp_clone
+rm -rf "$tmp_dir"
 
 echo "✅ Project '$project_name' created from '$subdir' at commit $commit_sha"
