@@ -20,7 +20,7 @@ fi
 
 # Config
 repo_url="https://github.com/prajwalhaniya/bootstraps.git"
-commit_sha="ab448202b8f702f7c30270ea3be091257e7b51ef"
+commit_sha="ffb9f939ba62b9fe0f1483beae26e8ad9a883cb8"
 subdir="$template_type"
 
 # Create a temp directory
