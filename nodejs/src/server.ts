@@ -2,7 +2,7 @@ import express from "express";
 import appRoutes from "./routes/index.js";
 import "reflect-metadata";
 import { AppDataSource } from "./dal/dataSource.js";
-import { User } from "./dal/models/User.js";
+import logger from "./services/logger/index.js";
 
 const PORT = 3000;
 const app = express();
@@ -16,6 +16,7 @@ router.use("/app", appRoutes);
 AppDataSource.initialize();
 
 app.listen(PORT, () => {
+    logger.info("Server is listening on the port", PORT);
     console.log("Server is listening on the port", PORT);
 });
 
