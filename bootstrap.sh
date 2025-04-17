@@ -13,16 +13,16 @@ if [ -z "$project_name" ] || [ -z "$project_type" ]; then
 fi
 
 # Config
-repo_url="https://github.com/prajwalhaniya/bootstraps.git"
+base_repo_url="https://github.com/prajwalhaniya/bootstraps"
 
-# Select commit SHA and subdir based on project_type
+# Select subdirectory URL based on project_type
 case "$project_type" in
     nodejs)
-        commit_sha="ab448202b8f702f7c30270ea3be091257e7b51ef"
+        dir_url="$base_repo_url/tree/master/nodejs"
         subdir="nodejs"
         ;;
     React)
-        commit_sha="b89dd5a3c906bcbe388fe8564feb47543f0d7c7f"
+        dir_url="$base_repo_url/tree/master/React"
         subdir="React"
         ;;
     *)
@@ -40,8 +40,8 @@ git init -q
 git sparse-checkout init --cone
 git sparse-checkout set "$subdir"
 
-# Fetch the specific commit (no remote added)
-git fetch "$repo_url" "$commit_sha" --depth=1
+# Fetch the master branch (no remote added)
+git fetch "$base_repo_url.git" master --depth=1
 git checkout FETCH_HEAD
 
 # Move the extracted subdir to the target project directory
@@ -51,4 +51,4 @@ mv temp_clone/"$subdir" "$project_name"
 # Cleanup
 rm -rf temp_clone
 
-echo "✅ Project '$project_name' created from '$subdir' in commit $commit_sha"
+echo "✅ Project '$project_name' created from '$subdir'"
