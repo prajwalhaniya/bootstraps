@@ -28,6 +28,7 @@ case "$project_type" in
     python)
         dir_url="$base_repo_url/tree/master/python"
         subdir="python"
+        ;;
     *)
         echo "❌ Unsupported project type: $project_type"
         echo "Supported types: nodejs, React"
