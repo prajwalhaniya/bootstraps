@@ -6,6 +6,7 @@ import (
 	"app/internal/config"
 	"app/internal/db"
 	"app/internal/server"
+	"app/internal/utils"
 )
 
 func main() {
@@ -16,6 +17,6 @@ func main() {
 		log.Fatal("failed to connect to database:", err)
 	}
 
-	srv := server.New(conn, cfg)
+	srv := server.New(conn, cfg, utils.Logger)
 	srv.Start()
 }
