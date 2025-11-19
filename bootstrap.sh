@@ -8,7 +8,7 @@ project_name=$1
 project_type=$2
 
 if [ -z "$project_name" ] || [ -z "$project_type" ]; then
-    echo "Usage: $0 <project_name> <project_type (nodejs|React)>"
+    echo "Usage: $0 <project_name> <project_type (nodejs|go|React|python)>"
     exit 1
 fi
 
@@ -17,6 +17,10 @@ base_repo_url="https://github.com/prajwalhaniya/bootstraps"
 
 # Select subdirectory URL based on project_type
 case "$project_type" in
+    go)
+        dir_url="$base_repo_url/tree/master/go"
+        subdir="go"
+        ;;
     nodejs)
         dir_url="$base_repo_url/tree/master/nodejs"
         subdir="nodejs"
@@ -31,7 +35,7 @@ case "$project_type" in
         ;;
     *)
         echo "❌ Unsupported project type: $project_type"
-        echo "Supported types: nodejs, React"
+        echo "Supported types: nodejs, go, React, python"
         exit 1
         ;;
 esac
