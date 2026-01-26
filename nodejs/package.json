@@ -11,7 +11,9 @@
     "clean": "rimraf ./dist",
     "build-ts": "tsc",
     "serve": "node -r dotenv/config ./dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json}\""
   },
   "type": "module",
   "author": "Prajwal Haniya",
@@ -27,12 +29,13 @@
     "typeorm": "^0.3.22",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
-  },
-  "devDependencies": {
+},
+"devDependencies": {
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
+    "prettier": "^3.8.0",
     "typescript": "^5.8.3"
   }
 }

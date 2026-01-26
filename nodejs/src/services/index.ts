@@ -6,9 +6,9 @@ class UserService {
         try {
             const userModel = AppDataSource.getRepository(User);
             const user = await userModel.findOneBy({
-                id: 1
+                id: 1,
             });
-        
+
             console.log({ user });
 
             return user;

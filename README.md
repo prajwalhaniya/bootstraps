@@ -11,4 +11,5 @@ bash <(curl -s https://raw.githubusercontent.com/prajwalhaniya/bootstraps/refs/h
 
 1. nodejs <img src="https://skillicons.dev/icons?i=nodejs" width="18" height="18"> -> TypeScript, Express, TypeORM, SQLite
 2. Python <img src="https://skillicons.dev/icons?i=python" width="18" height="18"> -> FastAPI, SQLAlchemy, SQLite
-3. React <img src="https://skillicons.dev/icons?i=react" width="18" height="18"> -> TypeScript, Shadcn, Tailwind
+3. Go <img src="https://skillicons.dev/icons?i=go" width="18" height="18"> -> Go, Gin, Gorm, PostgreSQL
+4. React <img src="https://skillicons.dev/icons?i=react" width="18" height="18"> -> TypeScript, Shadcn, Tailwind
