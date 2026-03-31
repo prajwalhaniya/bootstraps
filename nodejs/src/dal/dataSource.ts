@@ -3,9 +3,9 @@ import { User } from "./models/User.js";
 
 export const AppDataSource = new DataSource({
     type: "sqlite",
-    database: "./database.sqlite",
-    synchronize: true,
-    logging: false,
-    entities:  [User],
-    logger: "advanced-console"
+    database: process.env.DB_PATH ?? "./database.sqlite",
+    synchronize: process.env.NODE_ENV !== "production",
+    logging: process.env.NODE_ENV !== "production",
+    entities: [User],
+    logger: "advanced-console",
 });

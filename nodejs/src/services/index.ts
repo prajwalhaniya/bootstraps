@@ -1,5 +1,6 @@
 import { User } from "../dal/models/User.js";
 import { AppDataSource } from "../dal/dataSource.js";
+import logger from "./logger/index.js";
 
 class UserService {
     async getUser() {
@@ -13,7 +14,8 @@ class UserService {
 
             return user;
         } catch (error) {
-            console.log(error);
+            logger.error("UserService.getUser failed", { error });
+            throw error;
         }
     }
 }

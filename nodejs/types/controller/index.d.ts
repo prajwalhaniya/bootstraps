@@ -1,4 +1,4 @@
 declare const userController: {
-    getUsers: () => Promise<import("../dal/models/User.js").User | null | undefined>;
+    getUsers: () => Promise<import("../dal/models/User.js").User | null>;
 };
 export default userController;
