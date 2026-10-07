@@ -7,10 +7,6 @@ interface HealthStatus {
     status: "healthy" | "unhealthy";
     timestamp: string;
     uptime: number;
-    database: {
-        status: "connected" | "disconnected";
-        type: string;
-    };
     service: string;
 }
 
@@ -34,10 +30,6 @@ router.get("/", async (req: Request, res: Response) => {
             status: dbStatus === "connected" ? "healthy" : "unhealthy",
             timestamp: new Date().toISOString(),
             uptime: process.uptime(),
-            database: {
-                status: dbStatus,
-                type: dbType,
-            },
             service: "nodejs-app",
         };
 

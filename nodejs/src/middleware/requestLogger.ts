@@ -13,9 +13,7 @@ declare global {
 export const requestLogger = (req: Request, res: Response, next: NextFunction) => {
     const startTime = Date.now();
 
-    const requestId =
-        (req.headers["x-request-id"] as string) ||
-        `req-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const requestId = (req.headers["x-request-id"] as string) || crypto.randomUUID();
     req.id = requestId;
     res.setHeader("X-Request-ID", requestId);
 
