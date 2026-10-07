@@ -1,0 +1,56 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "apiforge: Node server (tsx)",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/entry/nodejs",
+            "runtimeExecutable": "pnpm",
+            "runtimeArgs": ["run", "dev"],
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/entry/nodejs/.env"
+        },
+        {
+            "name": "apiforge: Node server (compiled build)",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/entry/nodejs",
+            "program": "${workspaceFolder}/entry/nodejs/dist/common/server.js",
+            "preLaunchTask": "tsc: build - entry/nodejs/tsconfig.json",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/entry/nodejs/.env"
+        },
+        {
+            "name": "apiforge: Python server (uvicorn)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": ["common.server:app", "--reload", "--port", "8000"],
+            "cwd": "${workspaceFolder}/entry/python",
+            "python": "${workspaceFolder}/entry/python/.venv/bin/python",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/entry/python/.env"
+        },
+        {
+            "name": "apiforge: Sidecar (tsx)",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/entry/sidecar",
+            "runtimeExecutable": "pnpm",
+            "runtimeArgs": ["run", "dev"],
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/entry/sidecar/.env"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "apiforge: All servers",
+            "configurations": [
+                "apiforge: Node server (tsx)",
+                "apiforge: Python server (uvicorn)",
+                "apiforge: Sidecar (tsx)"
+            ]
+        }
+    ]
+}
