@@ -12,14 +12,15 @@
         "lint": "tsc --noEmit"
     },
     "dependencies": {
+        "@apiforge/gmail": "workspace:*",
+        "@apiforge/postgres": "workspace:*",
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
+        "exceljs": "^4.4.0",
         "express": "^5.2.1",
         "helmet": "^8.0.0",
         "morgan": "^1.10.0",
-        "pg": "^8.13.1",
         "reflect-metadata": "^0.2.2",
-        "typeorm": "^0.3.20",
         "zod": "^3.24.1"
     },
     "devDependencies": {
