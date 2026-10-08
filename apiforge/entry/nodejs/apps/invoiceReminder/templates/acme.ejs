@@ -1,0 +1,10 @@
+<p>Hi <%= invoice.customerName %>,</p>
+
+<p>
+    Acme Corp here — invoice <strong><%= invoice.invoiceNumber %></strong> for
+    <strong>$<%= invoice.amountDue.toFixed(2) %></strong> was due on <%= invoice.dueDate %> and is still open.
+</p>
+
+<p>Let us know if you have any questions about this invoice.</p>
+
+<p>— Acme Corp Billing</p>

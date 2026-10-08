@@ -18,7 +18,8 @@ function parseCredentials(json: string | undefined): Record<string, GmailAppPass
 
 export const invoiceReminderConfig = {
     invoicesDir: process.env.INVOICE_REMINDER_INVOICES_DIR ?? path.join(appDir, "invoices"),
-    templatePath: path.join(appDir, "templates", "reminder.ejs"),
+    templatesDir: path.join(appDir, "templates"),
+    defaultTemplatePath: path.join(appDir, "templates", "default.ejs"),
     intervalHours: Number(process.env.INVOICE_REMINDER_INTERVAL_HOURS ?? 4),
     gmailCredentials: parseCredentials(process.env.INVOICE_REMINDER_GMAIL_CREDENTIALS),
 };
