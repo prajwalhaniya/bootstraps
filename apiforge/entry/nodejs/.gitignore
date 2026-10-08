@@ -1,3 +1,6 @@
 node_modules/
 dist/
 .env
+
+# real client invoice spreadsheets — keep only the sample under sample-data/
+apps/invoice-reminder/invoices/*.xlsx

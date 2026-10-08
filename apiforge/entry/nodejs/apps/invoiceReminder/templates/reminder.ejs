@@ -1,0 +1,10 @@
+<p>Hi <%= invoice.customerName %>,</p>
+
+<p>
+    This is a reminder that invoice <strong><%= invoice.invoiceNumber %></strong> for
+    <strong>$<%= invoice.amountDue.toFixed(2) %></strong>, due on <%= invoice.dueDate %>, is still unpaid.
+</p>
+
+<p>Please arrange payment at your earliest convenience.</p>
+
+<p>Thank you.</p>

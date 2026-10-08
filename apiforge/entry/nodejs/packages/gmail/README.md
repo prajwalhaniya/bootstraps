@@ -51,3 +51,25 @@ await sender.send(message, "default");
 ```
 
 Both constructors also accept a `Map<string, Credentials>` instead of a plain object, if you're building the registry dynamically.
+
+## `GmailTemplateSender` — EJS templates
+
+Wraps either sender above to render an `.ejs` file into the email body, instead of building `html`/`text` strings by hand:
+
+```ts
+import { GmailAppPasswordSender, GmailTemplateSender } from "../../../packages/gmail/index.js";
+
+const sender = new GmailTemplateSender(new GmailAppPasswordSender({ "acme-corp": { user, appPassword } }));
+
+await sender.send(
+    {
+        to: "user@example.com",
+        subject: "Reminder",
+        templatePath: new URL("./templates/reminder.ejs", import.meta.url).pathname,
+        templateData: { name: "Jane" },
+    },
+    "acme-corp",
+);
+```
+
+See `apps/invoice-reminder` for a full example (a scheduled job that reads invoices from a spreadsheet and sends EJS-templated reminder emails).

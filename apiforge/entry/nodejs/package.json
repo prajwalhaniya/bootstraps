@@ -14,6 +14,8 @@
     "dependencies": {
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
+        "ejs": "^7.0.1",
+        "exceljs": "^4.4.0",
         "express": "^5.2.1",
         "googleapis": "^183.0.0",
         "helmet": "^8.0.0",
@@ -26,6 +28,7 @@
     },
     "devDependencies": {
         "@types/cors": "^2.8.17",
+        "@types/ejs": "^3.1.5",
         "@types/express": "^5.0.6",
         "@types/morgan": "^1.9.9",
         "@types/node": "^22.10.5",
