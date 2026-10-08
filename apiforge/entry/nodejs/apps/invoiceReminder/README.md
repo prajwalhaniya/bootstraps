@@ -1,6 +1,6 @@
 # invoice-reminder
 
-Reads invoice spreadsheets on a schedule and emails a reminder for every unpaid invoice, using `packages/gmail`.
+Reads invoice spreadsheets on a schedule and emails a reminder for every unpaid invoice, using `@apiforge/gmail`.
 
 ## How it works
 
@@ -9,7 +9,7 @@ On server startup (`routes/index.ts` import triggers it), `scheduler.ts` runs th
 1. `excelReader.ts` scans `invoices/` for `*.xlsx` files.
 2. Each file must be named **`{clientId}_{file-name}.xlsx`** — e.g. `acme_october.xlsx` has `clientId = "acme"`. `clientId` is also the lookup key into the Gmail credentials registry (see below), so each client sends from their own Gmail account.
 3. Each sheet's rows become `InvoiceRow`s; rows with `Status` other than `Paid` get a reminder.
-4. `emailService.ts` renders that client's email template for each due invoice and sends it via `GmailTemplateSender` (from `packages/gmail`).
+4. `emailService.ts` renders that client's email template for each due invoice and sends it via `GmailTemplateSender` (from `@apiforge/gmail`).
 
 ## Spreadsheet format
 

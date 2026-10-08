@@ -20,7 +20,7 @@ Always pass an explicit `type` to `@Column(...)` (as above), rather than relying
 
 ```ts
 // apps/my-api/services/index.ts
-import { connectPostgres } from "../../../packages/postgres/index.js";
+import { connectPostgres } from "@apiforge/postgres";
 import { Item } from "../models/item.entity.js";
 
 const dataSource = await connectPostgres({

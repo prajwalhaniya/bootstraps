@@ -1,4 +1,4 @@
-import { GmailAppPasswordSender, GmailTemplateSender } from "../../packages/gmail/index.js";
+import { GmailAppPasswordSender, GmailTemplateSender } from "@apiforge/gmail";
 import { logger } from "../../common/utils/logger.js";
 import { invoiceReminderConfig } from "./config.js";
 import { getTemplatePathForClient } from "./templates.js";

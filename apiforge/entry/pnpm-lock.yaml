@@ -6,44 +6,35 @@ settings:
 
 importers:
 
-  .:
+  nodejs:
     dependencies:
+      '@apiforge/gmail':
+        specifier: workspace:*
+        version: link:../packages/gmail
+      '@apiforge/postgres':
+        specifier: workspace:*
+        version: link:../packages/postgres
       cors:
         specifier: ^2.8.5
         version: 2.8.6
       dotenv:
         specifier: ^16.4.7
         version: 16.6.1
-      ejs:
-        specifier: ^7.0.1
-        version: 7.0.1
       exceljs:
         specifier: ^4.4.0
         version: 4.4.0
       express:
         specifier: ^5.2.1
         version: 5.2.1
-      googleapis:
-        specifier: ^183.0.0
-        version: 183.0.0
       helmet:
         specifier: ^8.0.0
         version: 8.3.0
       morgan:
         specifier: ^1.10.0
         version: 1.12.1
-      nodemailer:
-        specifier: ^10.0.15
-        version: 10.0.15
-      pg:
-        specifier: ^8.13.1
-        version: 8.23.1
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
-      typeorm:
-        specifier: ^0.3.20
-        version: 0.3.31(pg@8.23.1)
       zod:
         specifier: ^3.24.1
         version: 3.25.76
@@ -51,9 +42,6 @@ importers:
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.19
-      '@types/ejs':
-        specifier: ^3.1.5
-        version: 3.1.5
       '@types/express':
         specifier: ^5.0.6
         version: 5.0.6
@@ -63,9 +51,71 @@ importers:
       '@types/node':
         specifier: ^22.10.5
         version: 22.20.5
+      tsx:
+        specifier: ^4.19.2
+        version: 4.23.15
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+
+  packages/gmail:
+    dependencies:
+      ejs:
+        specifier: ^7.0.1
+        version: 7.0.1
+      googleapis:
+        specifier: ^183.0.0
+        version: 183.0.0
+      nodemailer:
+        specifier: ^10.0.15
+        version: 10.0.15
+    devDependencies:
+      '@types/ejs':
+        specifier: ^3.1.5
+        version: 3.1.5
       '@types/nodemailer':
         specifier: ^8.0.2
         version: 8.0.2
+
+  packages/postgres:
+    dependencies:
+      pg:
+        specifier: ^8.13.1
+        version: 8.23.1
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      typeorm:
+        specifier: ^0.3.20
+        version: 0.3.31(pg@8.23.1)
+
+  sidecar:
+    dependencies:
+      cors:
+        specifier: ^2.8.5
+        version: 2.8.6
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.6.1
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
+      helmet:
+        specifier: ^8.0.0
+        version: 8.3.0
+      zod:
+        specifier: ^3.25.76
+        version: 3.25.76
+    devDependencies:
+      '@types/cors':
+        specifier: ^2.8.17
+        version: 2.8.19
+      '@types/express':
+        specifier: ^5.0.6
+        version: 5.0.6
+      '@types/node':
+        specifier: ^22.10.5
+        version: 22.20.5
       tsx:
         specifier: ^4.19.2
         version: 4.23.15

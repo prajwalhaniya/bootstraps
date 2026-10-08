@@ -9,7 +9,7 @@ Each sender is constructed once with a registry of credentials keyed by `clientI
 For clients that just send from one fixed mailbox each — no Google Cloud project, no OAuth flow. Generate an [app password](https://myaccount.google.com/apppasswords) per Gmail account.
 
 ```ts
-import { GmailAppPasswordSender } from "../../../packages/gmail/index.js";
+import { GmailAppPasswordSender } from "@apiforge/gmail";
 
 const sender = new GmailAppPasswordSender({
     "acme-corp": { user: "notifications@acme.example", appPassword: "xxxx xxxx xxxx xxxx" },
@@ -24,7 +24,7 @@ await sender.send({ to: "user@example.com", subject: "Hi", text: "Hello!" }, "ac
 For clients that already did Google's OAuth consent flow and have a refresh token for their sending account.
 
 ```ts
-import { GmailApiSender } from "../../../packages/gmail/index.js";
+import { GmailApiSender } from "@apiforge/gmail";
 
 const sender = new GmailApiSender({
     "acme-corp": {
@@ -57,7 +57,7 @@ Both constructors also accept a `Map<string, Credentials>` instead of a plain ob
 Wraps either sender above to render an `.ejs` file into the email body, instead of building `html`/`text` strings by hand:
 
 ```ts
-import { GmailAppPasswordSender, GmailTemplateSender } from "../../../packages/gmail/index.js";
+import { GmailAppPasswordSender, GmailTemplateSender } from "@apiforge/gmail";
 
 const sender = new GmailTemplateSender(new GmailAppPasswordSender({ "acme-corp": { user, appPassword } }));
 

@@ -1,6 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type { GmailAppPasswordCredentials } from "../../packages/gmail/index.js";
+import type { GmailAppPasswordCredentials } from "@apiforge/gmail";
 
 const appDir = path.dirname(fileURLToPath(import.meta.url));
 

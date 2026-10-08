@@ -12,27 +12,22 @@
         "lint": "tsc --noEmit"
     },
     "dependencies": {
+        "@apiforge/gmail": "workspace:*",
+        "@apiforge/postgres": "workspace:*",
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
-        "ejs": "^7.0.1",
         "exceljs": "^4.4.0",
         "express": "^5.2.1",
-        "googleapis": "^183.0.0",
         "helmet": "^8.0.0",
         "morgan": "^1.10.0",
-        "nodemailer": "^10.0.15",
-        "pg": "^8.13.1",
         "reflect-metadata": "^0.2.2",
-        "typeorm": "^0.3.20",
         "zod": "^3.24.1"
     },
     "devDependencies": {
         "@types/cors": "^2.8.17",
-        "@types/ejs": "^3.1.5",
         "@types/express": "^5.0.6",
         "@types/morgan": "^1.9.9",
         "@types/node": "^22.10.5",
-        "@types/nodemailer": "^8.0.2",
         "tsx": "^4.19.2",
         "typescript": "^5.7.3"
     }
