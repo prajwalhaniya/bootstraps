@@ -15,8 +15,10 @@
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
         "express": "^5.2.1",
+        "googleapis": "^183.0.0",
         "helmet": "^8.0.0",
         "morgan": "^1.10.0",
+        "nodemailer": "^10.0.15",
         "pg": "^8.13.1",
         "reflect-metadata": "^0.2.2",
         "typeorm": "^0.3.20",
@@ -27,6 +29,7 @@
         "@types/express": "^5.0.6",
         "@types/morgan": "^1.9.9",
         "@types/node": "^22.10.5",
+        "@types/nodemailer": "^8.0.2",
         "tsx": "^4.19.2",
         "typescript": "^5.7.3"
     }
