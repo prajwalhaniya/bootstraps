@@ -14,19 +14,26 @@
     "dependencies": {
         "@apiforge/gmail": "workspace:*",
         "@apiforge/postgres": "workspace:*",
+        "@instructor-ai/instructor": "^1.7.0",
         "cors": "^2.8.5",
         "dotenv": "^16.4.7",
+        "ejs": "^7.0.1",
         "exceljs": "^4.4.0",
         "express": "^5.2.1",
         "helmet": "^8.0.0",
         "morgan": "^1.10.0",
+        "multer": "^2.4.0",
+        "openai": "^7.32.0",
         "reflect-metadata": "^0.2.2",
+        "tesseract.js": "^7.0.0",
         "zod": "^3.24.1"
     },
     "devDependencies": {
         "@types/cors": "^2.8.17",
+        "@types/ejs": "^3.1.5",
         "@types/express": "^5.0.6",
         "@types/morgan": "^1.9.9",
+        "@types/multer": "^2.3.0",
         "@types/node": "^22.10.5",
         "tsx": "^4.19.2",
         "typescript": "^5.7.3"
