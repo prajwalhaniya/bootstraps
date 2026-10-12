@@ -2,5 +2,15 @@ node_modules/
 dist/
 .env
 
+# tesseract.js (apps/book-tracker) downloads its OCR language data on first
+# run into the working directory, unless langPath is configured
+*.traineddata
+
 # real client invoice spreadsheets — keep only the sample under sample-data/
 apps/invoice-reminder/invoices/*.xlsx
+
+# apps/book-tracker — uploaded cover images and the local sqlite db
+apps/book-tracker/uploads/*
+!apps/book-tracker/uploads/.gitkeep
+apps/book-tracker/data/*
+!apps/book-tracker/data/.gitkeep

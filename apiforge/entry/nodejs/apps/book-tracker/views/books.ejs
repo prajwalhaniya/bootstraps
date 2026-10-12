@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Book Tracker - Books</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+        h1 { font-size: 1.5rem; }
+        nav a { color: #2563eb; text-decoration: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { text-align: left; padding: 0.5rem; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        img { width: 48px; border-radius: 3px; }
+        .empty { color: #666; }
+        .search { display: flex; gap: 0.5rem; margin: 1rem 0; }
+        .search input[type="text"] { flex: 1; padding: 0.5rem; font-size: 1rem; box-sizing: border-box; }
+        .search button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+        .search a { align-self: center; }
+        .pagination { display: flex; gap: 1rem; align-items: center; margin-top: 1.25rem; font-size: 0.9rem; }
+        .pagination a { color: #2563eb; text-decoration: none; }
+        .pagination span.disabled { color: #aaa; }
+        .api-key-box { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; padding: 0.75rem; background: #f6f6f6; border-radius: 4px; }
+        .api-key-box label { font-weight: 600; font-size: 0.9rem; }
+        .api-key-box input[type="password"] { flex: 1; min-width: 180px; padding: 0.4rem; font-size: 0.9rem; }
+        .api-key-box button { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+        .api-key-status { font-size: 0.85rem; color: #666; }
+    </style>
+</head>
+<body>
+    <nav><a href="/app/js/book-tracker/">&larr; Scan another book</a></nav>
+    <h1>Books</h1>
+    <form class="search" action="/app/js/book-tracker/books" method="get">
+        <input type="text" name="q" value="<%= query %>" placeholder="Search by title, author or publisher" />
+        <button type="submit">Search</button>
+        <% if (query) { %><a href="/app/js/book-tracker/books">Clear</a><% } %>
+    </form>
+
+    <% if (books.length === 0) { %>
+        <p class="empty"><%= query ? `No books match "${query}".` : "No books saved yet." %></p>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cover</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Publisher</th>
+                    <th>Price</th>
+                    <th>Added by</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% books.forEach((book) => { %>
+                    <tr>
+                        <td><img src="/app/js/book-tracker/uploads/<%= book.frontCoverPath %>" alt="" /></td>
+                        <td><%= book.title %></td>
+                        <td><%= book.author %></td>
+                        <td><%= book.isbn %></td>
+                        <td><%= book.publisher %></td>
+                        <td><%= book.price %></td>
+                        <td><%= book.createdBy %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <% const qParam = query ? `&q=${encodeURIComponent(query)}` : ""; %>
+        <nav class="pagination">
+            <% if (page > 1) { %>
+                <a href="/app/js/book-tracker/books?page=<%= page - 1 %><%= qParam %>">&laquo; Prev</a>
+            <% } else { %>
+                <span class="disabled">&laquo; Prev</span>
+            <% } %>
+            <span>Page <%= page %> of <%= totalPages %> (<%= total %> book<%= total === 1 ? "" : "s" %>)</span>
+            <% if (page < totalPages) { %>
+                <a href="/app/js/book-tracker/books?page=<%= page + 1 %><%= qParam %>">Next &raquo;</a>
+            <% } else { %>
+                <span class="disabled">Next &raquo;</span>
+            <% } %>
+        </nav>
+    <% } %>
+</body>
+</html>

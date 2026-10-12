@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Book Tracker</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+        h1 { font-size: 1.5rem; }
+        nav a { color: #2563eb; text-decoration: none; }
+        .field { margin-bottom: 1rem; }
+        .field label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+        .field input[type="text"] { width: 100%; padding: 0.5rem; font-size: 1rem; box-sizing: border-box; }
+        .covers { display: flex; gap: 1rem; margin: 1rem 0; }
+        .covers img { max-width: 140px; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 0.6rem 1.2rem; font-size: 1rem; cursor: pointer; }
+        button.secondary { background: #fff; border: 1px solid #2563eb; color: #2563eb; }
+        .hint { color: #666; font-size: 0.9rem; }
+        .actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+        .api-key-box { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; padding: 0.75rem; background: #f6f6f6; border-radius: 4px; }
+        .api-key-box label { font-weight: 600; font-size: 0.9rem; }
+        .api-key-box input[type="password"] { flex: 1; min-width: 180px; padding: 0.4rem; font-size: 0.9rem; }
+        .api-key-box button { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+        .api-key-status { font-size: 0.85rem; color: #666; }
+    </style>
+</head>
+<body>
+    <nav><a href="/app/js/book-tracker/books">View saved books &rarr;</a></nav>
+    <h1>Book Tracker</h1>
+
+    <%- include("_apiKeyWidget") %>
+
+    <p class="hint" data-requires-no-api-key>Set your API key above to scan and add a book.</p>
+
+    <div data-requires-api-key hidden>
+    <% if (!parsed) { %>
+        <p class="hint">Upload a clear photo of the front and back cover. OCR will pre-fill the details below for you to verify.</p>
+        <form action="/app/js/book-tracker/scan" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="apiKey" />
+            <div class="field">
+                <label for="frontCover">Front cover</label>
+                <input type="file" id="frontCover" name="frontCover" accept="image/*" required />
+            </div>
+            <div class="field">
+                <label for="backCover">Back cover</label>
+                <input type="file" id="backCover" name="backCover" accept="image/*" required />
+            </div>
+            <button type="submit">Scan covers</button>
+        </form>
+    <% } else { %>
+        <p class="hint">Verify the details below (OCR isn't perfect) and submit.</p>
+        <% if (!aiFillEnabled) { %>
+            <p class="hint">Set an AI provider API key in <code>.env</code> to enable "Fill with AI", which re-reads the covers and replaces these fields with its answer.</p>
+        <% } %>
+        <div class="covers">
+            <img src="/app/js/book-tracker/uploads/<%= frontCoverFile %>" alt="Front cover" />
+            <img src="/app/js/book-tracker/uploads/<%= backCoverFile %>" alt="Back cover" />
+        </div>
+        <form action="/app/js/book-tracker/books" method="post">
+            <input type="hidden" name="apiKey" />
+            <input type="hidden" name="frontCoverFile" value="<%= frontCoverFile %>" />
+            <input type="hidden" name="backCoverFile" value="<%= backCoverFile %>" />
+            <div class="field">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" value="<%= parsed.title %>" required />
+            </div>
+            <div class="field">
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author" value="<%= parsed.author %>" />
+            </div>
+            <div class="field">
+                <label for="isbn">ISBN</label>
+                <input type="text" id="isbn" name="isbn" value="<%= parsed.isbn %>" />
+            </div>
+            <div class="field">
+                <label for="publisher">Publisher</label>
+                <input type="text" id="publisher" name="publisher" value="<%= parsed.publisher %>" />
+            </div>
+            <div class="field">
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price" value="<%= parsed.price %>" />
+            </div>
+            <div class="actions">
+                <button type="submit">Save book</button>
+                <% if (aiFillEnabled) { %>
+                    <button
+                        type="submit"
+                        class="secondary"
+                        formaction="/app/js/book-tracker/ai-fill"
+                        formmethod="post"
+                        formnovalidate
+                        title="Ask an AI to re-read the covers and replace the fields below with its answer"
+                    >Fill with AI</button>
+                <% } %>
+                <a href="/app/js/book-tracker/">Start over</a>
+            </div>
+        </form>
+    <% } %>
+    </div>
+</body>
+</html>

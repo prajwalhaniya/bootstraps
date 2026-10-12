@@ -4,3 +4,4 @@ packages:
   - "packages/*"
 allowBuilds:
   esbuild: true
+  tesseract.js: true
