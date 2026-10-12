@@ -33,9 +33,24 @@ const aiProvider = resolveAiProvider();
 const aiProviderDefaults = AI_PROVIDERS[aiProvider];
 const aiApiKey = process.env[aiProviderDefaults.apiKeyEnv];
 
+/** Access keys the owner hands out, each mapped to the username it should save books under.
+ *  Edited by hand (JSON in .env) — there's no sign-up flow, this is the whole "auth" system. */
+function parseApiKeys(json: string | undefined): Record<string, string> {
+    if (!json) return {};
+
+    try {
+        return JSON.parse(json);
+    } catch {
+        throw new Error('BOOK_TRACKER_API_KEYS must be JSON: {"<api-key>": "<username>"}');
+    }
+}
+
 export const bookTrackerConfig = {
     uploadsDir: path.join(appDir, "uploads"),
     viewsDir: path.join(appDir, "views"),
+    /** Static assets (e.g. the API key widget's script) — served separately from uploads, which
+     *  holds user-submitted files rather than app code. */
+    publicDir: path.join(appDir, "public"),
     dbPath: process.env.BOOK_TRACKER_DB_PATH ?? path.join(appDir, "data", "books.db"),
     /** Where tesseract.js caches the OCR language data it downloads on first use. */
     ocrCacheDir: path.join(appDir, "data", "ocr-cache"),
@@ -50,4 +65,6 @@ export const bookTrackerConfig = {
         model: process.env.BOOK_TRACKER_AI_MODEL || aiProviderDefaults.defaultModel,
         enabled: Boolean(aiApiKey),
     },
+    /** apiKey -> username. Scanning and saving books require one of these; viewing never does. */
+    apiKeys: parseApiKeys(process.env.BOOK_TRACKER_API_KEYS),
 };

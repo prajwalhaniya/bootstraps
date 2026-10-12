@@ -18,12 +18,16 @@
         .pagination { display: flex; gap: 1rem; align-items: center; margin-top: 1.25rem; font-size: 0.9rem; }
         .pagination a { color: #2563eb; text-decoration: none; }
         .pagination span.disabled { color: #aaa; }
+        .api-key-box { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; padding: 0.75rem; background: #f6f6f6; border-radius: 4px; }
+        .api-key-box label { font-weight: 600; font-size: 0.9rem; }
+        .api-key-box input[type="password"] { flex: 1; min-width: 180px; padding: 0.4rem; font-size: 0.9rem; }
+        .api-key-box button { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+        .api-key-status { font-size: 0.85rem; color: #666; }
     </style>
 </head>
 <body>
     <nav><a href="/app/js/book-tracker/">&larr; Scan another book</a></nav>
     <h1>Books</h1>
-
     <form class="search" action="/app/js/book-tracker/books" method="get">
         <input type="text" name="q" value="<%= query %>" placeholder="Search by title, author or publisher" />
         <button type="submit">Search</button>
@@ -42,6 +46,7 @@
                     <th>ISBN</th>
                     <th>Publisher</th>
                     <th>Price</th>
+                    <th>Added by</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +58,7 @@
                         <td><%= book.isbn %></td>
                         <td><%= book.publisher %></td>
                         <td><%= book.price %></td>
+                        <td><%= book.createdBy %></td>
                     </tr>
                 <% }); %>
             </tbody>

@@ -11,6 +11,7 @@ export interface Book extends ParsedBookFields {
     frontCoverPath: string;
     backCoverPath: string;
     createdAt: string;
+    createdBy: string;
 }
 
 export interface PaginatedBooks {

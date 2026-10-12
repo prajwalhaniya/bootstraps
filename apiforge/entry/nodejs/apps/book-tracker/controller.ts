@@ -87,6 +87,8 @@ export function createBook(req: Request, res: Response) {
         price: price ?? "",
         frontCoverPath: frontCoverFile,
         backCoverPath: backCoverFile,
+        // Set by requireApiKey from the submitted key — never taken from the request body itself.
+        createdBy: res.locals.username,
     });
 
     res.redirect("/app/js/book-tracker/books");

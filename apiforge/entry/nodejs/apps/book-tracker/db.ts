@@ -20,9 +20,17 @@ db.exec(`
         price TEXT NOT NULL,
         front_cover_path TEXT NOT NULL,
         back_cover_path TEXT NOT NULL,
-        created_at TEXT NOT NULL
+        created_at TEXT NOT NULL,
+        created_by TEXT NOT NULL DEFAULT ''
     )
 `);
+
+// Migration for databases created before created_by existed — additive only, never touches
+// existing rows' data beyond backfilling this one new column with an empty string.
+const existingColumns = db.prepare(`PRAGMA table_info(books)`).all() as { name: string }[];
+if (!existingColumns.some((column) => column.name === "created_by")) {
+    db.exec(`ALTER TABLE books ADD COLUMN created_by TEXT NOT NULL DEFAULT ''`);
+}
 
 interface BookRow {
     id: number;
@@ -34,6 +42,7 @@ interface BookRow {
     front_cover_path: string;
     back_cover_path: string;
     created_at: string;
+    created_by: string;
 }
 
 function rowToBook(row: BookRow): Book {
@@ -47,15 +56,16 @@ function rowToBook(row: BookRow): Book {
         frontCoverPath: row.front_cover_path,
         backCoverPath: row.back_cover_path,
         createdAt: row.created_at,
+        createdBy: row.created_by,
     };
 }
 
 export const bookRepository = {
-    create(fields: ParsedBookFields & { frontCoverPath: string; backCoverPath: string }): Book {
+    create(fields: ParsedBookFields & { frontCoverPath: string; backCoverPath: string; createdBy: string }): Book {
         const createdAt = new Date().toISOString();
         const insert = db.prepare(`
-            INSERT INTO books (title, author, isbn, publisher, price, front_cover_path, back_cover_path, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO books (title, author, isbn, publisher, price, front_cover_path, back_cover_path, created_at, created_by)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `);
         const { lastInsertRowid } = insert.run(
             fields.title,
@@ -66,6 +76,7 @@ export const bookRepository = {
             fields.frontCoverPath,
             fields.backCoverPath,
             createdAt,
+            fields.createdBy,
         );
         return { id: Number(lastInsertRowid), createdAt, ...fields };
     },

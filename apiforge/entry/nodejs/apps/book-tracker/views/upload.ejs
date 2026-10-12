@@ -16,15 +16,26 @@
         button.secondary { background: #fff; border: 1px solid #2563eb; color: #2563eb; }
         .hint { color: #666; font-size: 0.9rem; }
         .actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+        .api-key-box { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; padding: 0.75rem; background: #f6f6f6; border-radius: 4px; }
+        .api-key-box label { font-weight: 600; font-size: 0.9rem; }
+        .api-key-box input[type="password"] { flex: 1; min-width: 180px; padding: 0.4rem; font-size: 0.9rem; }
+        .api-key-box button { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+        .api-key-status { font-size: 0.85rem; color: #666; }
     </style>
 </head>
 <body>
     <nav><a href="/app/js/book-tracker/books">View saved books &rarr;</a></nav>
     <h1>Book Tracker</h1>
 
+    <%- include("_apiKeyWidget") %>
+
+    <p class="hint" data-requires-no-api-key>Set your API key above to scan and add a book.</p>
+
+    <div data-requires-api-key hidden>
     <% if (!parsed) { %>
         <p class="hint">Upload a clear photo of the front and back cover. OCR will pre-fill the details below for you to verify.</p>
         <form action="/app/js/book-tracker/scan" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="apiKey" />
             <div class="field">
                 <label for="frontCover">Front cover</label>
                 <input type="file" id="frontCover" name="frontCover" accept="image/*" required />
@@ -45,6 +56,7 @@
             <img src="/app/js/book-tracker/uploads/<%= backCoverFile %>" alt="Back cover" />
         </div>
         <form action="/app/js/book-tracker/books" method="post">
+            <input type="hidden" name="apiKey" />
             <input type="hidden" name="frontCoverFile" value="<%= frontCoverFile %>" />
             <input type="hidden" name="backCoverFile" value="<%= backCoverFile %>" />
             <div class="field">
@@ -83,5 +95,6 @@
             </div>
         </form>
     <% } %>
+    </div>
 </body>
 </html>
