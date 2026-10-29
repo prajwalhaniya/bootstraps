@@ -1,0 +1,19 @@
+# Copied onto the Pigsty host's Grafana provisioning directory by
+# stack/observability/install-stack.sh. Confirm the hostnames below resolve from
+# wherever Grafana actually runs on that host before relying on this in production.
+apiVersion: 1
+
+datasources:
+  - name: Tempo
+    type: tempo
+    access: proxy
+    url: http://localhost:3200
+    isDefault: false
+    editable: false
+
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://localhost:3100
+    isDefault: false
+    editable: false
